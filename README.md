@@ -63,7 +63,7 @@ Here are some screenshots of the app in action:
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/yourusername/ecanteen-app.git
+   git clone https://github.com/AtharvaJahagirdar13/ecanteen-app.git
    cd ecanteen-app
 
 
