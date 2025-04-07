@@ -1,7 +1,8 @@
-```markdown
 # E-Canteen App
 
 E-Canteen App is a mobile application built using **React Native** with **JSX** and **Expo**. It leverages **Firebase** for secure user authentication, providing a seamless experience for users to browse and order from a canteen.
+
+---
 
 ## Table of Contents
 
@@ -14,6 +15,8 @@ E-Canteen App is a mobile application built using **React Native** with **JSX** 
 - [License](#license)
 - [Contact](#contact)
 
+---
+
 ## Features
 
 - **User Authentication:** Secure sign-up, login, and password reset powered by Firebase.
@@ -21,11 +24,15 @@ E-Canteen App is a mobile application built using **React Native** with **JSX** 
 - **Rapid Development:** Utilizes Expo for streamlined app development and testing.
 - **Real-Time Updates:** Firebase integration ensures data is updated in real time.
 
+---
+
 ## Tech Stack
 
 - **React Native & JSX:** For building dynamic and responsive mobile interfaces.
 - **Expo:** Simplifies the development workflow and testing process.
 - **Firebase:** Provides robust and secure user authentication services.
+
+---
 
 ## Screenshots
 
@@ -35,24 +42,30 @@ Here are some screenshots of the app in action:
 ![Login Screen](./screenshots/login.png)
 <!-- Add additional screenshots as needed -->
 
+---
+
 ## Getting Started
 
 ### Prerequisites
 
 - **Node.js** (v12 or higher recommended)
 - **npm** or **yarn**
-- **Expo CLI:** Install globally using:
-  ```bash
-  npm install -g expo-cli
-  ```
+- **Expo CLI**
+
+> **Install Expo CLI globally:**
+>
+> ```bash
+> npm install -g expo-cli
+> ```
 
 ### Installation
 
 1. **Clone the repository:**
+
    ```bash
    git clone https://github.com/yourusername/ecanteen-app.git
    cd ecanteen-app
-   ```
+
 
 2. **Install dependencies:**
    ```bash
