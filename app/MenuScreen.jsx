@@ -21,6 +21,7 @@ import {
   fetchMenuItems
 } from './menu';
 import { useCart } from './CartContext';
+import { useFavorites } from './FavoritesContext';
 
 export default function MenuScreen() {
   const router = useRouter();
@@ -107,6 +108,7 @@ export default function MenuScreen() {
   console.log('Filtered items:', filteredItems);
 
   const { cartItems, addToCart, removeFromCart } = useCart();
+  const { isFavorite, addToFavorites, removeFromFavorites } = useFavorites();
 
   const handleAddToCart = (item) => {
     const completeItem = {
@@ -150,17 +152,25 @@ export default function MenuScreen() {
         </TouchableOpacity>
         <Text style={localMenuStyles.headerTitle}>Menu</Text>
         {/* Cart Button routes to CartScreen.jsx */}
-        <TouchableOpacity
-          style={localMenuStyles.cartButton}
-          onPress={() => router.push('/CartScreen')}
-        >
-          <MaterialCommunityIcons name="cart-outline" size={24} color="#333" />
-          {cartItemCount > 0 && (
-            <View style={localMenuStyles.cartBadge}>
-              <Text style={localMenuStyles.cartBadgeText}>{cartItemCount}</Text>
-            </View>
-          )}
-        </TouchableOpacity>
+        <View style={localMenuStyles.headerButtons}>
+          <TouchableOpacity
+            style={localMenuStyles.iconButton}
+            onPress={() => router.push('/favorites')}
+          >
+            <MaterialCommunityIcons name="heart-outline" size={24} color="#FF6200" />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={localMenuStyles.cartButton}
+            onPress={() => router.push('/CartScreen')}
+          >
+            <MaterialCommunityIcons name="cart-outline" size={24} color="#333" />
+            {cartItemCount > 0 && (
+              <View style={localMenuStyles.cartBadge}>
+                <Text style={localMenuStyles.cartBadgeText}>{cartItemCount}</Text>
+              </View>
+            )}
+          </TouchableOpacity>
+        </View>
       </View>
 
       {/* Search Bar */}
@@ -261,7 +271,18 @@ export default function MenuScreen() {
                     <Text style={localMenuStyles.popularItemPrice}>
                       {typeof item.price === 'number' ? `₹${item.price}` : item.price}
                     </Text>
-                    <View style={localMenuStyles.quantityControls}>
+                    <View style={localMenuStyles.itemActions}>
+                      <TouchableOpacity
+                        onPress={() => isFavorite(item.id) ? removeFromFavorites(item.id) : addToFavorites(item)}
+                        style={localMenuStyles.heartButton}
+                      >
+                        <MaterialCommunityIcons
+                          name={isFavorite(item.id) ? "heart" : "heart-outline"}
+                          size={24}
+                          color={isFavorite(item.id) ? "#FF6200" : "#666"}
+                        />
+                      </TouchableOpacity>
+                      <View style={localMenuStyles.quantityControls}>
                       {getItemQuantity(item.id) > 0 && (
                         <>
                           <TouchableOpacity
@@ -279,6 +300,7 @@ export default function MenuScreen() {
                       >
                         <MaterialCommunityIcons name="plus" size={14} color="#fff" />
                       </TouchableOpacity>
+                      </View>
                     </View>
                   </View>
                 </View>
@@ -336,7 +358,18 @@ export default function MenuScreen() {
                     <Text style={localMenuStyles.menuItemPrice}>
                       {typeof item.price === 'number' ? `₹${item.price}` : item.price}
                     </Text>
-                    <View style={localMenuStyles.quantityControls}>
+                    <View style={localMenuStyles.itemActions}>
+                      <TouchableOpacity
+                        onPress={() => isFavorite(item.id) ? removeFromFavorites(item.id) : addToFavorites(item)}
+                        style={localMenuStyles.heartButton}
+                      >
+                        <MaterialCommunityIcons
+                          name={isFavorite(item.id) ? "heart" : "heart-outline"}
+                          size={24}
+                          color={isFavorite(item.id) ? "#FF6200" : "#666"}
+                        />
+                      </TouchableOpacity>
+                      <View style={localMenuStyles.quantityControls}>
                       {getItemQuantity(item.id) > 0 && (
                         <>
                           <TouchableOpacity
@@ -354,6 +387,7 @@ export default function MenuScreen() {
                       >
                         <MaterialCommunityIcons name="plus" size={14} color="#fff" />
                       </TouchableOpacity>
+                      </View>
                     </View>
                   </View>
                 </View>
@@ -401,6 +435,14 @@ const localMenuStyles = StyleSheet.create({
   backButton: {
     padding: 5
   },
+  headerButtons: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  iconButton: {
+    padding: 8,
+    marginRight: 10,
+  },
   cartButton: {
     padding: 5
   },
@@ -414,6 +456,15 @@ const localMenuStyles = StyleSheet.create({
     height: 18,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  itemActions: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: 10
+  },
+  heartButton: {
+    padding: 5
   },
   cartBadgeText: {
     color: '#fff',
