@@ -1,10 +1,13 @@
 import { Stack } from "expo-router";
 import { CartProvider } from './CartContext';
+import { FavoritesProvider } from './FavoritesContext';
 
 export default function RootLayout() {
   return (
-    <CartProvider>
-      <Stack />
-    </CartProvider>
+    <FavoritesProvider>
+      <CartProvider>
+        <Stack />
+      </CartProvider>
+    </FavoritesProvider>
   );
 }
